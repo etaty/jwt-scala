@@ -1,7 +1,8 @@
 package pdi.jwt
 
-import java.security.spec.{ECPrivateKeySpec, ECPublicKeySpec, ECGenParameterSpec, ECParameterSpec, ECPoint}
-import java.security.{SecureRandom, KeyFactory, KeyPairGenerator}
+import java.security.spec.{ECGenParameterSpec, ECParameterSpec, ECPoint, ECPrivateKeySpec, ECPublicKeySpec}
+import java.security.{KeyFactory, KeyPairGenerator, SecureRandom}
+
 import org.bouncycastle.jce.ECNamedCurveTable
 import org.bouncycastle.jce.spec.ECNamedCurveSpec
 import javax.crypto.spec.SecretKeySpec
@@ -63,7 +64,7 @@ trait Fixture extends TimeFixture {
 
   val tokenEmpty = header64Empty + "." + claim64 + "."
 
-  val publicKeyRSA = """-----BEGIN PUBLIC KEY-----
+  val publicKeyRSA = BlockKey("""-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvzoCEC2rpSpJQaWZbUml
 sDNwp83Jr4fi6KmBWIwnj1MZ6CUQ7rBasuLI8AcfX5/10scSfQNCsTLV2tMKQaHu
 vyrVfwY0dINk+nkqB74QcT2oCCH9XduJjDuwWA4xLqAKuF96FsIes52opEM50W7/
@@ -71,9 +72,9 @@ W7DZCKXkC8fFPFj6QF5ZzApDw2Qsu3yMRmr7/W9uWeaTwfPx24YdY7Ah+fdLy3KN
 40vXv9c4xiSafVvnx9BwYL7H1Q8NiK9LGEN6+JSWfgckQCs6UUBOXSZdreNN9zbQ
 Cwyzee7bOJqXUDAuLcFARzPw1EsZAyjVtGCKIQ0/btqK+jFunT2NBC8RItanDZpp
 tQIDAQAB
------END PUBLIC KEY-----"""
+-----END PUBLIC KEY-----""")
 
-  val privateKeyRSA = """-----BEGIN RSA PRIVATE KEY-----
+  val privateKeyRSA = BlockKey("""-----BEGIN RSA PRIVATE KEY-----
 MIIEpQIBAAKCAQEAvzoCEC2rpSpJQaWZbUmlsDNwp83Jr4fi6KmBWIwnj1MZ6CUQ
 7rBasuLI8AcfX5/10scSfQNCsTLV2tMKQaHuvyrVfwY0dINk+nkqB74QcT2oCCH9
 XduJjDuwWA4xLqAKuF96FsIes52opEM50W7/W7DZCKXkC8fFPFj6QF5ZzApDw2Qs
@@ -99,7 +100,7 @@ ffx3xHv9zvvGHZqQ1nHKkaEuyjqo+5kli6N8QjWNzsFbdvBQ0CLJoqGhVHsXuWnz
 W3Z4cBbVAoGAEtnwY1OJM7+R2u1CW0tTjqDlYU2hUNa9t1AbhyGdI2arYp+p+umA
 b5VoYLNsdvZhqjVFTrYNEuhTJFYCF7jAiZLYvYm0C99BqcJnJPl7JjWynoNHNKw3
 9f6PIOE1rAmPE8Cfz/GFF5115ZKVlq+2BY8EKNxbCIy2d/vMEvisnXI=
------END RSA PRIVATE KEY-----"""
+-----END RSA PRIVATE KEY-----""")
 
   val generatorRSA = KeyPairGenerator.getInstance(JwtUtils.RSA, JwtUtils.PROVIDER)
   generatorRSA.initialize(1024)

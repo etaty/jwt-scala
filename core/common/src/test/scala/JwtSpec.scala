@@ -8,7 +8,7 @@ import pdi.jwt.algorithms._
 import pdi.jwt.exceptions._
 
 class JwtSpec extends UnitSpec with Fixture {
-  def battleTestEncode(d: DataEntryBase, key: String) = {
+  def battleTestEncode[T : KeyToArrayByte](d: DataEntryBase, key: T) = {
     assertResult(d.tokenEmpty, d.algo.fullName) { Jwt.encode(claim) }
     assertResult(d.token, d.algo.fullName) { Jwt.encode(d.header, claim, key, d.algo) }
     assertResult(d.token, d.algo.fullName) { Jwt.encode(claim, key, d.algo) }
